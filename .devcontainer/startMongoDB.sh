@@ -1,11 +1,11 @@
 #!/bin/bash
 
+# Ensure MongoDB directories exist
+sudo mkdir -p /data/db /var/log/mongodb
+sudo chown -R $(whoami) /data/db /var/log/mongodb
+
 # Start MongoDB service
-sudo mongod --fork --logpath /var/log/mongodb/mongod.log
+mongod --fork --logpath /var/log/mongodb/mongod.log --dbpath /data/db
 
 echo "MongoDB has been started successfully!"
 mongod --version
-
-# Run sample MongoDB commands
-echo "Current databases:"
-mongosh --eval "db.getMongo().getDBNames()"
